@@ -11,3 +11,5 @@ https://deeplizard.com/learn/playlist/PLZbbT5o_s2xrfNyHZsM6ufI0iZENK9xgG
 
 In order to run our program we used Amazon Web Services (AWS), but you can use any other
 cloud instance like azure or google cloud as long as it contains a gpu.
+
+Just make sure you have pytorched installed before running it!
