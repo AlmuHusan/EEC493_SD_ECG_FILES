@@ -12,6 +12,7 @@ pottasium=[]
 for file in directories:
     fileName.append(file)
     pottasium.append(file[:3])
+    #Checks the pottasium level and sets it to a value
 for i in range(len(pottasium)):
     pottasium[i]=int(float(pottasium[i])*10)
     if(pottasium[i]<=30):

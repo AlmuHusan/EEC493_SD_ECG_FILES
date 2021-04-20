@@ -1,9 +1,3 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
 from skimage import img_as_float
 from skimage import io, color, morphology
 from skimage.transform import rotate
@@ -19,10 +13,9 @@ randPot = [format(1 + (x * .1),'1.1f') for x in range(0, 81)]
 print(randPot)
 for i in randPot:
     pottasiumList=[0]
+    # Generate random pattasium level from 1.0 to 9.0
+    # You can increase the amount of images per level by increasing the range
     for j in range(5):
-        #Generate random pattasium level from 1.0 to 9.0
-        #randPot=float(decimal.Decimal(random.randrange(10, 90))/10)
-        #print(randPot)
         if supervised:
             pottasiumList.append(i)
         image = img_as_float(color.rgb2gray(io.imread('images/'+i+".png")))
@@ -34,23 +27,12 @@ for i in randPot:
         out_thin = morphology.thin(image_binary)
         arr=out_thin.astype(np.uint8)
         arr=np.matrix.transpose(arr)
-
-        #np.savetxt("arr.txt", arr ,delimiter=',', fmt='%d')
         result = np.where(arr == 1)
-
-        #print('Tuple of arrays returned : ', result)
-        #print(np.flipud(result[0]))
-
-        #plot without noise
-        #plt.plot(result[0],result[1])
-        #plt.show()
-
-
 
         slicedX=result[0][::2]
         slicedY=result[1][::2]
         mu, sigma = 0, 3
-        # creating a noise with the same dimension as the dataset (2,2)
+        # creating a noise
         noise = np.random.normal(mu, sigma, [1,slicedY.size])
         #Remove graph UI
         plt.xticks([])
@@ -61,6 +43,7 @@ for i in randPot:
 
         plt.plot(slicedX,slicedY+noise[0])
         plt.figure()
+    #Go through and save all the images
     if supervised:
         for i in plt.get_fignums():
             fig =plt.figure(i)
